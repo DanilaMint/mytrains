@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "areas": {
+    "lang": {
+      "title": "Languages & Translation",
+      "subtitle": "EN/RU, grammar, translation",
+      "tasks": []
+    },
+    "conlang": {
+      "title": "Conlang & Linguistics",
+      "subtitle": "IPA, terminology, phonology",
+      "tasks": []
+    },
+    "math": {
+      "title": "Math & Algorithms",
+      "subtitle": "Discrete math, big-O, graphs",
+      "tasks": []
+    }
+  }
+}

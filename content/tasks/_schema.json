@@ -1,0 +1,46 @@
+{
+  "_about": "Reference for skill 'add-task'. NOT loaded by the engine. Use as the source of truth when generating new task files.",
+  "common": {
+    "required": ["id", "area", "title", "type", "prompt"],
+    "optional": ["subarea", "level", "tags", "question", "explanation", "hints", "updatedAt"]
+  },
+  "types": {
+    "multiple-choice": {
+      "required": ["choices", "answer"],
+      "shape": {
+        "multi": "boolean, default false",
+        "shuffle": "boolean, default true",
+        "choices": "[{id: string, text: string}], min 2",
+        "answer": "string[] — array of choice ids (single element unless multi=true)"
+      }
+    },
+    "free-text": {
+      "required": ["expectedAnswers"],
+      "shape": {
+        "source": "string (optional text shown above input)",
+        "inputLang": "string, BCP-47 (e.g. 'ru', 'en')",
+        "match": "{ caseSensitive: false, trim: true, collapseWhitespace: true }",
+        "expectedAnswers": "[{text: string, weight: number}], min 1, weight 0..1",
+        "keywords": "string[] — обязательные ключевые слова",
+        "minMatch": "number 0..1, default 0.8",
+        "minKeywordHits": "integer, default 0"
+      }
+    },
+    "matching": {
+      "required": ["pairs"],
+      "shape": {
+        "leftHeader": "string, default 'Term'",
+        "rightHeader": "string, default 'Definition'",
+        "shuffle": "'both' | 'left' | 'right' | 'none', default 'both'",
+        "pairs": "[{left: string, right: string}], min 2, unique lefts and rights"
+      }
+    }
+  },
+  "fieldRules": {
+    "id": "ascii kebab-case, ^[a-z0-9][a-z0-9-]*[a-z0-9]$, globally unique",
+    "area": "one of: lang | conlang | math",
+    "type": "one of: multiple-choice | free-text | matching",
+    "title": "short human-readable title",
+    "tags": "lowercase strings for filtering"
+  }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Check manifest — Learning Hub</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body>
+  <main class="container app">
+    <h1>Manifest check</h1>
+    <p>
+      Эта страница обходит <code>content/tasks/manifest.json</code> и проверяет, что каждая задача доступна и валидна.
+      Полезно перед <code>git push</code> или после добавления нескольких задач.
+    </p>
+
+    <button id="run" type="button">Прогнать</button>
+    <button id="clear" type="button" class="secondary">Очистить</button>
+
+    <pre id="out" aria-live="polite"></pre>
+
+    <p><a href="../">← на главную</a></p>
+  </main>
+
+  <script>
+    const out = document.getElementById('out');
+    const runBtn = document.getElementById('run');
+    const clearBtn = document.getElementById('clear');
+
+    runBtn.addEventListener('click', run);
+    clearBtn.addEventListener('click', () => { out.textContent = ''; });
+
+    async function run() {
+      out.textContent = 'running…\n';
+      const log = [];
+      const requiredCommon = ['id', 'area', 'title', 'type', 'prompt'];
+
+      try {
+        const r = await fetch('manifest.json', { cache: 'no-cache' });
+        if (!r.ok) throw new Error('manifest ' + r.status);
+        const m = await r.json();
+        log.push(`manifest v${m.version}`);
+
+        let total = 0, ok = 0;
+        const statuses = {};
+
+        for (const [area, a] of Object.entries(m.areas || {})) {
+          for (const id of (a.tasks || [])) {
+            total++;
+            const url = `${area}/${id}.json`;
+            let status = 'OK';
+            try {
+              const tr = await fetch(url, { cache: 'no-cache' });
+              if (!tr.ok) { status = `MISSING (${tr.status})`; }
+              else {
+                const t = await tr.json();
+                const missing = requiredCommon.filter((k) => !(k in t));
+                if (missing.length) status = `SCHEMA (missing: ${missing.join(', ')})`;
+                else if (!['multiple-choice', 'free-text', 'matching'].includes(t.type)) status = `TYPE (${t.type})`;
+                else if (t.type === 'multiple-choice' && (!Array.isArray(t.choices) || t.choices.length < 2 || !Array.isArray(t.answer))) status = 'SHAPE (mc)';
+                else if (t.type === 'free-text' && (!Array.isArray(t.expectedAnswers) || t.expectedAnswers.length === 0)) status = 'SHAPE (ft)';
+                else if (t.type === 'matching' && (!Array.isArray(t.pairs) || t.pairs.length < 2)) status = 'SHAPE (mt)';
+                else ok++;
+              }
+            } catch (e) {
+              status = `INVALID (${e.message})`;
+            }
+            statuses[status] = (statuses[status] || 0) + 1;
+            const padded = status.padEnd(20);
+            log.push(`${padded} ${url}`);
+          }
+        }
+
+        log.push('');
+        log.push(`Summary: ${ok}/${total} OK`);
+        for (const [k, v] of Object.entries(statuses)) {
+          log.push(`  ${k}: ${v}`);
+        }
+      } catch (e) {
+        log.push('FATAL ' + e.message);
+      }
+
+      out.textContent = log.join('\n');
+    }
+  </script>
+</body>
+</html>

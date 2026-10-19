@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Hub</title>
+  <meta name="description" content="Оффлайн-сборник задач: языки, лингвистика, математика. Без сервера, без сборки.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <header class="container">
+    <hgroup>
+      <h1>Learning Hub</h1>
+      <p>Тренировочные задачи. Без сервера, без сборки.</p>
+    </hgroup>
+    <nav>
+      <ul>
+        <li><a href="#/">Главная</a></li>
+        <li><a href="#/progress">Прогресс</a></li>
+        <li><a href="#/about">О проекте</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="app" class="container app" aria-busy="true">
+    <p>loading…</p>
+  </main>
+
+  <footer class="container">
+    <small>
+      Static. GitHub Pages.
+      <span id="streak-badge" aria-live="polite"></span>
+    </small>
+  </footer>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

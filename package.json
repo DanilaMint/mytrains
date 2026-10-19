@@ -1,0 +1,11 @@
+{
+  "name": "learning-hub",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Оффлайн-сборник задач. Чистая статика, без сборки.",
+  "scripts": {
+    "validate": "node -e \"JSON.parse(require('fs').readFileSync('content/tasks/manifest.json'))\" && echo 'manifest OK'",
+    "serve": "python3 -m http.server 8000"
+  }
+}

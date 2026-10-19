@@ -1,0 +1,11 @@
+/* Design tokens — переопределяем то, что наследуется от Pico */
+:root {
+  --app-radius: 0.6rem;
+  --app-gap: 1rem;
+  --app-maxw: 760px;
+
+  --app-correct: #2a9d8f;
+  --app-wrong: #e63946;
+  --app-accent: var(--pico-primary);
+  --app-streak: #f4a261;
+}

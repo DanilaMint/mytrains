@@ -1,0 +1,114 @@
+/* Каркас приложения. Все собственные классы — под .app, чтобы не ломать Pico classless. */
+
+.app { max-width: var(--app-maxw); }
+
+header.container { padding-top: 1rem; }
+header hgroup h1 { margin-bottom: 0.2rem; }
+header nav ul { justify-content: flex-end; }
+
+/* Карточка задачи в листинге области */
+.task-card {
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--app-radius);
+  padding: var(--app-gap);
+  margin-bottom: 0.5rem;
+  background: var(--pico-card-background-color);
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.task-card:hover,
+.task-card:focus {
+  border-color: var(--app-accent);
+  text-decoration: none;
+}
+.task-card h3 { margin: 0 0 0.25rem; font-size: 1.05rem; }
+.task-card small { color: var(--pico-muted-color); }
+.task-card .badge { float: right; }
+
+/* Сетка карточек задач: 3 колонки на десктопе, 1 — на узких экранах */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.task-grid > .task-card { margin-bottom: 0; }
+@media (max-width: 640px) {
+  .task-grid { grid-template-columns: 1fr; }
+}
+
+/* Бейджи */
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+}
+.badge.done { background: color-mix(in srgb, var(--app-correct) 25%, transparent); color: var(--app-correct); }
+
+/* Баннер результата */
+.app-result-banner {
+  padding: 0.75rem 1rem;
+  border-radius: var(--app-radius);
+  margin-top: 1rem;
+  border-left: 4px solid var(--pico-muted-border-color);
+  background: var(--pico-card-background-color);
+}
+.app-result-banner.correct {
+  border-left-color: var(--app-correct);
+  background: color-mix(in srgb, var(--app-correct) 18%, transparent);
+}
+.app-result-banner.wrong {
+  border-left-color: var(--app-wrong);
+  background: color-mix(in srgb, var(--app-wrong) 18%, transparent);
+}
+
+/* Matching (DnD) */
+.matching-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.matching-col h4 { margin: 0 0 0.5rem; font-size: 0.85rem; color: var(--pico-muted-color); text-transform: uppercase; letter-spacing: 0.04em; }
+.matching-item {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--app-radius);
+  margin-bottom: 0.5rem;
+  background: var(--pico-card-background-color);
+  cursor: grab;
+  user-select: none;
+}
+.matching-item.dragging { opacity: 0.5; cursor: grabbing; }
+.matching-item.drop-target {
+  border-color: var(--app-accent);
+  background: color-mix(in srgb, var(--app-accent) 14%, transparent);
+}
+.matching-item.matched {
+  border-style: dashed;
+  border-color: var(--app-correct);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--pico-muted-color);
+}
+
+/* Streak */
+#streak-badge { color: var(--app-streak); margin-left: 0.5rem; }
+
+/* Прогресс-страница */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
+.stat-tile {
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--app-radius);
+  padding: 0.75rem 1rem;
+  background: var(--pico-card-background-color);
+}
+.stat-tile .stat-value { font-size: 1.5rem; font-weight: 600; }
+.stat-tile .stat-label { font-size: 0.8rem; color: var(--pico-muted-color); }
