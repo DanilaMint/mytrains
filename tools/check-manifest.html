@@ -35,7 +35,7 @@
     async function run() {
       out.textContent = 'running…\n';
       const log = [];
-      const requiredCommon = ['id', 'area', 'title', 'type', 'prompt'];
+      const requiredCommon = ['id', 'title', 'type', 'prompt'];
 
       try {
         const r = await fetch('manifest.json', { cache: 'no-cache' });
@@ -46,31 +46,30 @@
         let total = 0, ok = 0;
         const statuses = {};
 
-        for (const [area, a] of Object.entries(m.areas || {})) {
-          for (const id of (a.tasks || [])) {
-            total++;
-            const url = `${area}/${id}.json`;
-            let status = 'OK';
-            try {
-              const tr = await fetch(url, { cache: 'no-cache' });
-              if (!tr.ok) { status = `MISSING (${tr.status})`; }
-              else {
-                const t = await tr.json();
-                const missing = requiredCommon.filter((k) => !(k in t));
-                if (missing.length) status = `SCHEMA (missing: ${missing.join(', ')})`;
-                else if (!['multiple-choice', 'free-text', 'matching'].includes(t.type)) status = `TYPE (${t.type})`;
-                else if (t.type === 'multiple-choice' && (!Array.isArray(t.choices) || t.choices.length < 2 || !Array.isArray(t.answer))) status = 'SHAPE (mc)';
-                else if (t.type === 'free-text' && (!Array.isArray(t.expectedAnswers) || t.expectedAnswers.length === 0)) status = 'SHAPE (ft)';
-                else if (t.type === 'matching' && (!Array.isArray(t.pairs) || t.pairs.length < 2)) status = 'SHAPE (mt)';
-                else ok++;
-              }
-            } catch (e) {
-              status = `INVALID (${e.message})`;
+        for (const id of (m.tasks || [])) {
+          total++;
+          const url = `${id}.json`;
+          let status = 'OK';
+          try {
+            const tr = await fetch(url, { cache: 'no-cache' });
+            if (!tr.ok) { status = `MISSING (${tr.status})`; }
+            else {
+              const t = await tr.json();
+              const missing = requiredCommon.filter((k) => !(k in t));
+              if (missing.length) status = `SCHEMA (missing: ${missing.join(', ')})`;
+              else if (!['multiple-choice', 'free-text', 'matching', 'stress'].includes(t.type)) status = `TYPE (${t.type})`;
+              else if (t.type === 'multiple-choice' && (!Array.isArray(t.choices) || t.choices.length < 2 || !Array.isArray(t.answer))) status = 'SHAPE (mc)';
+              else if (t.type === 'free-text' && (!Array.isArray(t.expectedAnswers) || t.expectedAnswers.length === 0)) status = 'SHAPE (ft)';
+              else if (t.type === 'matching' && (!Array.isArray(t.pairs) || t.pairs.length < 2)) status = 'SHAPE (mt)';
+              else if (t.type === 'stress' && (!Array.isArray(t.words) || t.words.length < 2)) status = 'SHAPE (stress)';
+              else ok++;
             }
-            statuses[status] = (statuses[status] || 0) + 1;
-            const padded = status.padEnd(20);
-            log.push(`${padded} ${url}`);
+          } catch (e) {
+            status = `INVALID (${e.message})`;
           }
+          statuses[status] = (statuses[status] || 0) + 1;
+          const padded = status.padEnd(20);
+          log.push(`${padded} ${url}`);
         }
 
         log.push('');

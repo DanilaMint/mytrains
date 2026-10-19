@@ -1,4 +1,4 @@
-// Главная страница: единый список всех задач из всех областей (сетка 3×N).
+// Главная страница: единый плоский список всех задач из манифеста.
 
 import { loadManifest } from "../engine.js";
 import { getAllProgress } from "../store.js";
@@ -12,17 +12,10 @@ export async function hubView(_params, _query, mount) {
     const list = h("div", { class: "app-hub" });
     list.appendChild(h("h2", {}, "Все задачи"));
     list.appendChild(h("p", { style: { color: "var(--pico-muted-color)" } },
-      "Все задания из всех областей в одном списке. Без деления по областям."
+      "Плоский список. Нажмите на карточку, чтобы открыть задание."
     ));
 
-    // Собираем плоский список задач, сохраняя порядок: сначала области по ключу,
-    // внутри области — порядок из манифеста.
-    const tasks = [];
-    for (const [areaKey, area] of Object.entries(manifest.areas || {})) {
-      for (const id of area.tasks || []) {
-        tasks.push({ areaKey, id });
-      }
-    }
+    const tasks = manifest.tasks || [];
 
     if (tasks.length === 0) {
       list.appendChild(h("div", { class: "empty-state" },
@@ -33,24 +26,17 @@ export async function hubView(_params, _query, mount) {
       ));
     } else {
       const grid = h("div", { class: "task-grid" });
-      for (const { areaKey, id } of tasks) {
+      for (const id of tasks) {
         const p = progress[id];
         const done = p && p.completed;
         grid.appendChild(
-          h("a", { class: "task-card", href: `#/task/${areaKey}/${id}` },
+          h("a", { class: "task-card", href: `#/task/${id}` },
             h("h3", {}, id),
-            h("small", {}, `area: ${areaKey}`),
             h("span", { class: `badge ${done ? "done" : ""}`, style: { float: "right" } }, done ? "✓" : "—"),
           )
         );
       }
       list.appendChild(grid);
-    }
-
-    if (Object.keys(manifest.areas || {}).length === 0) {
-      list.appendChild(h("div", { class: "empty-state" },
-        h("p", {}, "Манифест пуст — нет ни одной области. Проверьте content/tasks/manifest.json.")
-      ));
     }
 
     mount(list);

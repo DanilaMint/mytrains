@@ -40,7 +40,7 @@ export async function progressView(_params, _query, mount) {
     for (const id of ids.sort()) {
       const p = all[id];
       const tr = h("tr", {},
-        h("td", {}, h("a", { href: `#/task/${guessArea(id)}/${id}` }, id)),
+        h("td", {}, h("a", { href: `#/task/${id}` }, id)),
         h("td", {}, `${p.correct}/${p.attempts}`),
         h("td", {}, p.completed ? h("span", { class: "badge done" }, "✓") : h("span", { class: "badge" }, "—")),
       );
@@ -80,7 +80,7 @@ export async function progressView(_params, _query, mount) {
           alert("Невалидный JSON: " + e.message);
         }
       };
-      reader.readAsText(f);
+      reader.readAsText(fileInput);
       fileInput.value = "";
     });
     document.body.appendChild(fileInput);
@@ -121,12 +121,4 @@ function tile(value, label) {
     h("div", { class: "stat-value" }, value),
     h("div", { class: "stat-label" }, label),
   );
-}
-
-function guessArea(taskId) {
-  // Прогресс хранит только id; area нужно вспомнить. Эвристика: первая часть id до дефис-блока.
-  // Точнее — добавим area в recordAttempt, но пока так.
-  if (taskId.startsWith("en-") || taskId.startsWith("ru-")) return "lang";
-  if (taskId.startsWith("ipa-") || taskId.startsWith("ling-")) return "conlang";
-  return "math";
 }

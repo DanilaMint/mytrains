@@ -13,18 +13,9 @@ export async function loadManifest() {
   return manifestCache;
 }
 
-export async function loadTask(area, id) {
-  const url = `content/tasks/${area}/${id}.json`;
-  const task = await getJSON(url);
-  if (task.area !== area) {
-    console.warn(`[engine] task ${id} declares area=${task.area}, expected ${area}`);
-  }
-  return task;
-}
-
-export function getArea(areaKey) {
-  if (!manifestCache) return null;
-  return manifestCache.areas && manifestCache.areas[areaKey] || null;
+export async function loadTask(id) {
+  const url = `content/tasks/${id}.json`;
+  return getJSON(url);
 }
 
 export async function runTask(task, container, hooks = {}) {

@@ -4,7 +4,6 @@
 import { initStore, getStreak, subscribe } from "./store.js";
 import { initRouter, navigate } from "./router.js";
 import { hubView } from "./views/hub.js";
-import { areaView } from "./views/area.js";
 import { taskView } from "./views/task.js";
 import { progressView } from "./views/progress.js";
 import { aboutView } from "./views/about.js";
@@ -27,8 +26,7 @@ function boot() {
     { pattern: /^\/?$/,                       handler: hubView },
     { pattern: /^\/progress\/?$/,             handler: progressView },
     { pattern: /^\/about\/?$/,                handler: aboutView },
-    { pattern: /^\/area\/([^/]+)\/?$/,        handler: (params, query, mount) => areaView(params[1], mount) },
-    { pattern: /^\/task\/([^/]+)\/([^/]+)\/?$/, handler: (params, query, mount) => taskView(params[1], params[2], mount) },
+    { pattern: /^\/task\/([^/]+)\/?$/,        handler: (params, query, mount) => taskView(params[0], mount) },
     { pattern: /^.*$/,                        handler: notFoundView },
   ]);
 

@@ -112,3 +112,167 @@ header nav ul { justify-content: flex-end; }
 }
 .stat-tile .stat-value { font-size: 1.5rem; font-weight: 600; }
 .stat-tile .stat-label { font-size: 0.8rem; color: var(--pico-muted-color); }
+
+/* Stress (ударения) */
+.app-stress { display: flex; flex-direction: column; gap: 1rem; }
+.app-stress .stress-setup p { margin: 0; }
+.app-stress .stress-setup > p { margin-bottom: 0.5rem; }
+.stress-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1rem;
+}
+.stress-counter input[type="range"] { flex: 1 1 200px; min-width: 200px; }
+.stress-counter-label { min-width: 1.5rem; text-align: center; }
+
+.stress-word {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.stress-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stress-empty,
+.stress-btn,
+.stress-tile {
+  border-radius: var(--app-radius);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.stress-tile {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  border: 1px solid var(--pico-muted-border-color);
+  background: var(--pico-card-background-color);
+  text-transform: uppercase;
+}
+
+.stress-empty {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px dashed transparent;
+}
+
+.stress-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  border: 1px solid var(--pico-muted-border-color);
+  background: var(--pico-card-background-color);
+  color: var(--pico-muted-color);
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.1s ease, background 0.1s ease, border-color 0.1s ease;
+}
+/* Pico v2 в группах/[role="group"] принудительно ставит кнопкам width: auto,
+   из-за чего наши квадратики схлопывались под ширину содержимого
+   (с пустым содержимым — в ноль, отсюда «становится нормальной только
+   когда в ней появляется точка»). Перебиваем специфичностью: наш селектор
+   0,2,0 (два класса) против 0,2,0 Pico (два атрибута) — за счёт более
+   позднего источника выигрываем, плюс размеры остаются явными здесь. */
+.app-stress .stress-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.stress-btn .stress-btn-glyph { line-height: 1; font-size: 1em; }
+.stress-btn:hover,
+.stress-btn:focus-visible {
+  color: var(--app-accent);
+  border-color: var(--app-accent);
+  outline: none;
+}
+.stress-btn.inactive { cursor: default; opacity: 0.7; }
+.stress-btn.chosen-correct {
+  color: var(--app-correct);
+  border-color: var(--app-correct);
+  background: color-mix(in srgb, var(--app-correct) 18%, transparent);
+}
+.stress-btn.chosen-wrong {
+  color: var(--app-wrong);
+  border-color: var(--app-wrong);
+  background: color-mix(in srgb, var(--app-wrong) 18%, transparent);
+}
+
+.stress-tile.chosen-correct {
+  border-color: var(--app-correct);
+  background: color-mix(in srgb, var(--app-correct) 18%, transparent);
+  color: var(--app-correct);
+}
+.stress-tile.chosen-wrong {
+  border-color: var(--app-wrong);
+  background: color-mix(in srgb, var(--app-wrong) 18%, transparent);
+  color: var(--app-wrong);
+}
+
+.stress-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--pico-muted-color);
+  margin: 0.5rem 0 0;
+}
+
+.stress-fb {
+  text-align: center;
+  font-weight: 500;
+  margin: 0.5rem 0 0;
+}
+.stress-fb.correct { color: var(--app-correct); }
+.stress-fb.wrong { color: var(--app-wrong); }
+
+.stress-big {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0.5rem 0 1rem;
+  text-align: center;
+}
+.stress-explanation {
+  margin: 0.5rem 0 1rem;
+  color: var(--pico-muted-color);
+}
+.stress-review {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+.stress-review .review-ok { color: var(--app-correct); }
+.stress-review .review-no { color: var(--app-wrong); }
+.stress-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+/* Узкие экраны */
+@media (max-width: 480px) {
+  .stress-tile,
+  .stress-empty,
+  .stress-btn {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.05rem;
+  }
+  /* Та же история со специфичностью для мобильного размера. */
+  .app-stress .stress-btn { width: 2rem; height: 2rem; }
+  .stress-counter { flex-wrap: wrap; }
+}
+
+/* Тач: hover не работает, но «·» уже показывается по умолчанию, ничего не правим. */

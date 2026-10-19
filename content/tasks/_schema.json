@@ -1,7 +1,7 @@
 {
   "_about": "Reference for skill 'add-task'. NOT loaded by the engine. Use as the source of truth when generating new task files.",
   "common": {
-    "required": ["id", "area", "title", "type", "prompt"],
+    "required": ["id", "title", "type", "prompt"],
     "optional": ["subarea", "level", "tags", "question", "explanation", "hints", "updatedAt"]
   },
   "types": {
@@ -34,12 +34,18 @@
         "shuffle": "'both' | 'left' | 'right' | 'none', default 'both'",
         "pairs": "[{left: string, right: string}], min 2, unique lefts and rights"
       }
+    },
+    "stress": {
+      "required": ["words"],
+      "shape": {
+        "words": "[{word: string (Cyrillic letters, no spaces), stress: integer — 0-based letter index of the stressed vowel}], min 2, unique words",
+        "shuffle": "boolean, default true",
+        "defaultCount": "integer 1..len(words). Pre-selected value on the setup screen; defaults to len(words) if omitted"
+      }
     }
   },
   "fieldRules": {
     "id": "ascii kebab-case, ^[a-z0-9][a-z0-9-]*[a-z0-9]$, globally unique",
-    "area": "one of: lang | conlang | math",
-    "type": "one of: multiple-choice | free-text | matching",
     "title": "short human-readable title",
     "tags": "lowercase strings for filtering"
   }
