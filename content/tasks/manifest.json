@@ -1,4 +1,4 @@
 {
   "version": 1,
-  "tasks": ["ru-word-stress"]
+  "tasks": ["ru-noun-endings", "ru-word-stress"]
 }

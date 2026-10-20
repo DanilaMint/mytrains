@@ -42,6 +42,14 @@
         "shuffle": "boolean, default true",
         "defaultCount": "integer 1..len(words). Pre-selected value on the setup screen; defaults to len(words) if omitted"
       }
+    },
+    "endings": {
+      "required": ["items"],
+      "shape": {
+        "items": "[{context?:string, word:string, correct:string, wrong:string, note?:string, countRange?:[number,number]}], min 2, unique by (context, word). If countRange is given, the renderer picks a random integer in [min, max] at session start and substitutes {N} with the Russian cardinal in context/correct/wrong (and the same number is used everywhere within one item).",
+        "shuffle": "boolean, default true",
+        "defaultCount": "integer 1..len(items). Pre-selected value on the setup screen; defaults to len(items) if omitted"
+      }
     }
   },
   "fieldRules": {

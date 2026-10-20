@@ -1,0 +1,690 @@
+{
+  "id": "ru-noun-endings",
+  "subarea": "ru/morphology",
+  "level": "B1",
+  "title": "Правильные окончания существительных",
+  "tags": [
+    "ru",
+    "morphology",
+    "plural",
+    "endings"
+  ],
+  "type": "endings",
+  "prompt": "Прочитайте контекст в верхней строке, найдите нужную форму слова и нажмите на правильную карточку. Правильный и неправильный вариант каждый раз меняются местами, поэтому выбирайте именно форму, а не сторону. После ответа задача автоматически перейдёт к следующей паре.",
+  "shuffle": true,
+  "defaultCount": 10,
+  "items": [
+    {
+      "context": "Им. мн. ч.",
+      "word": "директор",
+      "correct": "директора",
+      "wrong": "директоры"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "профессор",
+      "correct": "профессора",
+      "wrong": "профессоры"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "мастер",
+      "correct": "мастера",
+      "wrong": "мастеры"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "отпуск",
+      "correct": "отпуска",
+      "wrong": "отпуски"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "катер",
+      "correct": "катера",
+      "wrong": "катеры"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "якорь",
+      "correct": "якоря",
+      "wrong": "якорьев"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "бухгалтер",
+      "correct": "бухгалтеры",
+      "wrong": "бухгалтера"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "тренер",
+      "correct": "тренеры",
+      "wrong": "тренера"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "лектор",
+      "correct": "лекторы",
+      "wrong": "лектора"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "ректор",
+      "correct": "ректоры",
+      "wrong": "ректора"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "выговор",
+      "correct": "выговоры",
+      "wrong": "выговора"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "договор",
+      "correct": "договоры",
+      "wrong": "договора"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "снайпер",
+      "correct": "снайперы",
+      "wrong": "снайпера"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "штурман",
+      "correct": "штурманы",
+      "wrong": "штурманов"
+    },
+    {
+      "context": "Им. мн. ч.",
+      "word": "диспетчер",
+      "correct": "диспетчеры",
+      "wrong": "диспетчера"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "апельсин",
+      "correct": "апельсинов",
+      "wrong": "апельсин"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "банан",
+      "correct": "бананов",
+      "wrong": "банан"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "лимон",
+      "correct": "лимонов",
+      "wrong": "лимон"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "помидор",
+      "correct": "помидоров",
+      "wrong": "помидор"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "мандарин",
+      "correct": "мандаринов",
+      "wrong": "мандарин"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "персик",
+      "correct": "персиков",
+      "wrong": "персик"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "абрикос",
+      "correct": "абрикосов",
+      "wrong": "абрикос"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "ананас",
+      "correct": "ананасов",
+      "wrong": "ананас"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "кабачок",
+      "correct": "кабачков",
+      "wrong": "кабачки"
+    },
+    {
+      "context": "Род. мн. ч.",
+      "word": "томат",
+      "correct": "томатов",
+      "wrong": "томат"
+    },
+    {
+      "context": "{N} шт.",
+      "word": "ампер",
+      "correct": "{N} ампер",
+      "wrong": "{N} амперов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "вольт",
+      "correct": "{N} вольт",
+      "wrong": "{N} вольтов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "ом",
+      "correct": "{N} ом",
+      "wrong": "{N} омов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "гольф (брюки)",
+      "correct": "{N} гольфов",
+      "wrong": "{N} гольф",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "чулок",
+      "correct": "{N} чулок",
+      "wrong": "{N} чулков",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "тапок",
+      "correct": "{N} тапок",
+      "wrong": "{N} тапков",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "шлёпок",
+      "correct": "{N} шлёпок",
+      "wrong": "{N} шлёпков",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "туфля",
+      "correct": "{N} туфель",
+      "wrong": "{N} туфлей",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "сапог",
+      "correct": "{N} сапог",
+      "wrong": "{N} сапогов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "валенок",
+      "correct": "{N} валенок",
+      "wrong": "{N} валенков",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "носок",
+      "correct": "{N} носков",
+      "wrong": "{N} носок",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "грузин",
+      "correct": "{N} грузин",
+      "wrong": "{N} грузинов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "армянин",
+      "correct": "{N} армян",
+      "wrong": "{N} армянов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "осетин",
+      "correct": "{N} осетин",
+      "wrong": "{N} осетинов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "румын",
+      "correct": "{N} румын",
+      "wrong": "{N} румынов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "болгарин",
+      "correct": "{N} болгар",
+      "wrong": "{N} болгаров",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "молдаванин",
+      "correct": "{N} молдаван",
+      "wrong": "{N} молдаванов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "башкир",
+      "correct": "{N} башкир",
+      "wrong": "{N} башкиров",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "татарин",
+      "correct": "{N} татар",
+      "wrong": "{N} татаров",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "туркмен",
+      "correct": "{N} туркмен",
+      "wrong": "{N} туркменов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "турок",
+      "correct": "{N} турок",
+      "wrong": "{N} туров",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "узбек",
+      "correct": "{N} узбеков",
+      "wrong": "{N} узбек",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "киргиз",
+      "correct": "{N} киргизов",
+      "wrong": "{N} киргиз",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "эскимос",
+      "correct": "{N} эскимосов",
+      "wrong": "{N} эскимос",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "монгол",
+      "correct": "{N} монголов",
+      "wrong": "{N} монгол",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "якут",
+      "correct": "{N} якутов",
+      "wrong": "{N} якут",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "тунгус",
+      "correct": "{N} тунгусов",
+      "wrong": "{N} тунгус",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "солдат",
+      "correct": "{N} солдат",
+      "wrong": "{N} солдатов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "кадет",
+      "correct": "{N} кадет",
+      "wrong": "{N} кадетов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "партизан",
+      "correct": "{N} партизан",
+      "wrong": "{N} партизанов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "гренадер",
+      "correct": "{N} гренадер",
+      "wrong": "{N} гренадеров",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "сапёр",
+      "correct": "{N} сапёров",
+      "wrong": "{N} сапёр",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "минёр",
+      "correct": "{N} минёров",
+      "wrong": "{N} минёр",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "мичман",
+      "correct": "{N} мичманов",
+      "wrong": "{N} мичман",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "джинсы",
+      "correct": "{N} джинсов",
+      "wrong": "{N} джинс",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "брелок",
+      "correct": "{N} брелоков",
+      "wrong": "{N} брелков",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "пожитки",
+      "correct": "{N} пожитков",
+      "wrong": "{N} пожиток",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "погоны",
+      "correct": "{N} погон",
+      "wrong": "{N} погонов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "сабля",
+      "correct": "{N} сабель",
+      "wrong": "{N} сабелей",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "вафля",
+      "correct": "{N} вафель",
+      "wrong": "{N} вафелей",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "блюдце",
+      "correct": "{N} блюдец",
+      "wrong": "{N} блюдцев",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "макароны",
+      "correct": "{N} макарон",
+      "wrong": "{N} макаронов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "полотенце",
+      "correct": "{N} полотенец",
+      "wrong": "{N} полотенцев",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "варежка",
+      "correct": "{N} варежек",
+      "wrong": "{N} варежеков",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "кочерга",
+      "correct": "{N} кочерег",
+      "wrong": "{N} кочерёг",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "розга",
+      "correct": "{N} розог",
+      "wrong": "{N} розгов",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "оладья",
+      "correct": "{N} оладий",
+      "wrong": "{N} оладьев",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "кегля",
+      "correct": "{N} кеглей",
+      "wrong": "{N} кегель",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "певунья",
+      "correct": "{N} певуний",
+      "wrong": "{N} певуней",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "ружьё",
+      "correct": "{N} ружей",
+      "wrong": "{N} ружьев",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "ущелье",
+      "correct": "{N} ущелий",
+      "wrong": "{N} ущельев",
+      "countRange": [
+        5,
+        20
+      ]
+    },
+    {
+      "context": "{N} шт.",
+      "word": "ясли",
+      "correct": "{N} яслей",
+      "wrong": "{N} ясель",
+      "countRange": [
+        5,
+        20
+      ]
+    }
+  ],
+  "explanation": "Эти формы часто вызывают колебания — опираться стоит на нормативные словари (gramota.ru, «Сводная грамматика» РАН). В разговорной речи и в художественных текстах нередко встречаются оба варианта, но в грамотном письменном языке предпочтительны указанные здесь окончания.",
+  "updatedAt": "2026-10-20"
+}
