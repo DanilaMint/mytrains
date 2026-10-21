@@ -126,19 +126,38 @@ header nav ul { justify-content: flex-end; }
 .stress-counter input[type="range"] { flex: 1 1 200px; min-width: 200px; }
 .stress-counter-label { min-width: 1.5rem; text-align: center; }
 
+/* Размер квадратика-буквы подстраивается под длину слова и ширину
+   контейнера: длинные слова остаются в одну строку (cell ужимается, чтобы
+   вписаться), а короткие перестают торчать разрежёнными «пустыми коробками»
+   (cell упирается в скромный максимум). Сама формула живёт на .stress-word,
+   поэтому любые изменения --n / ширины вьюпорта пересчитываются без JS. */
 .stress-word {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  flex-wrap: nowrap;
+  gap: var(--word-gap, 0.25rem);
   justify-content: center;
   margin: 0.5rem 0 0.75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  padding-bottom: 0.15rem;
+
+  container-type: inline-size;
+  --n: 5;                                  /* длина слова — задаётся из JS */
+  --word-gap: 0.25rem;
+  --cell-max: 2.25rem;
+  --cell-min: 1rem;
+  /* (N * cell + (N-1) * gap) ≤ 100cqw  ⇒  cell = (100cqw - (N-1) * gap) / N */
+  --cell: max(var(--cell-min), min(var(--cell-max),
+            (100cqw - (var(--n) - 1) * var(--word-gap)) / var(--n)));
 }
 
 .stress-cell {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
+  gap: calc(var(--cell, 2.25rem) * 0.08);
+  flex: 0 0 auto;                          /* не сжимаем — размер задан явно */
 }
 
 .stress-empty,
@@ -154,24 +173,24 @@ header nav ul { justify-content: flex-end; }
 }
 
 .stress-tile {
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 1.25rem;
+  width: var(--cell, 2.25rem);
+  height: var(--cell, 2.25rem);
+  font-size: calc(var(--cell, 2.25rem) * 0.5);
   border: 1px solid var(--pico-muted-border-color);
   background: var(--pico-card-background-color);
   text-transform: uppercase;
 }
 
 .stress-empty {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--cell, 2.25rem);
+  height: var(--cell, 2.25rem);
   border: 1px dashed transparent;
 }
 
 .stress-btn {
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 1.25rem;
+  width: var(--cell, 2.25rem);
+  height: var(--cell, 2.25rem);
+  font-size: calc(var(--cell, 2.25rem) * 0.5);
   border: 1px solid var(--pico-muted-border-color);
   background: var(--pico-card-background-color);
   color: var(--pico-muted-color);
@@ -187,8 +206,8 @@ header nav ul { justify-content: flex-end; }
    0,2,0 (два класса) против 0,2,0 Pico (два атрибута) — за счёт более
    позднего источника выигрываем, плюс размеры остаются явными здесь. */
 .app-stress .stress-btn {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: var(--cell, 2.25rem);
+  height: var(--cell, 2.25rem);
 }
 .stress-btn .stress-btn-glyph { line-height: 1; font-size: 1em; }
 .stress-btn:hover,
@@ -208,6 +227,15 @@ header nav ul { justify-content: flex-end; }
   border-color: var(--app-wrong);
   background: color-mix(in srgb, var(--app-wrong) 18%, transparent);
 }
+/* Подсказка «настоящего» ударения при ошибке: тот же зелёный, что и chosen-correct,
+   но пунктирная рамка и более прозрачный фон — визуально ясно, что это не клик
+   пользователя, а указание правильного ответа. */
+.stress-btn.revealed-correct {
+  color: var(--app-correct);
+  border-color: var(--app-correct);
+  border-style: dashed;
+  background: color-mix(in srgb, var(--app-correct) 10%, transparent);
+}
 
 .stress-tile.chosen-correct {
   border-color: var(--app-correct);
@@ -218,6 +246,12 @@ header nav ul { justify-content: flex-end; }
   border-color: var(--app-wrong);
   background: color-mix(in srgb, var(--app-wrong) 18%, transparent);
   color: var(--app-wrong);
+}
+.stress-tile.revealed-correct {
+  border-color: var(--app-correct);
+  border-style: dashed;
+  background: color-mix(in srgb, var(--app-correct) 10%, transparent);
+  color: var(--app-correct);
 }
 
 .stress-hint {
@@ -263,15 +297,13 @@ header nav ul { justify-content: flex-end; }
 
 /* Узкие экраны */
 @media (max-width: 480px) {
-  .stress-tile,
-  .stress-empty,
-  .stress-btn {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.05rem;
+  /* На мобильном ещё чуть ужимаем максимум и зазор, чтобы длинные слова
+     гарантированно влезали в одну строку. */
+  .stress-word {
+    --cell-max: 2rem;
+    --cell-min: 0.9rem;
+    --word-gap: 0.2rem;
   }
-  /* Та же история со специфичностью для мобильного размера. */
-  .app-stress .stress-btn { width: 2rem; height: 2rem; }
   .stress-counter { flex-wrap: wrap; }
 }
 
