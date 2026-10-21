@@ -150,6 +150,9 @@ export function mount(task, container, hooks = {}) {
       role: "group",
       "aria-label": `Слово ${w.word}`,
     });
+    // Сообщаем CSS длину слова — по ней через container queries вычисляется
+    // размер каждой клетки: длинные слова ужимаются, короткие — нет.
+    wordBox.style.setProperty("--n", String(w.word.length));
 
     for (let i = 0; i < w.word.length; i++) {
       const ch = w.word[i];
@@ -191,23 +194,38 @@ export function mount(task, container, hooks = {}) {
       role: "group",
       "aria-label": `Результат: ${w.word}`,
     });
+    // Та же CSS-переменная, что и в обычном рендере — иначе в заблокированном
+    // состоянии клетки «вернулись» бы к дефолту и смотрелись бы иначе.
+    wordBox.style.setProperty("--n", String(w.word.length));
+
+    // Состояние ячейки по её индексу: что показать — выбранный (верно/неверно),
+    // раскрытый правильный при ошибке, либо нейтральный «неактив».
+    //   null   → согласная, рисуем пустой плейсхолдер и обычную плитку.
+    //   "inactive" → гласная, в которую не попали (серая).
+    //   "chosen-correct" / "chosen-wrong" → то, во что кликнул пользователь.
+    //   "revealed-correct" → при ошибке подсвечиваем «настоящее» ударение.
+    const cellState = (i) => {
+      if (i === vowelPos) return isCorrect ? "chosen-correct" : "chosen-wrong";
+      if (!isCorrect && i === w.stress) return "revealed-correct";
+      return "inactive";
+    };
+
     for (let i = 0; i < w.word.length; i++) {
       const ch = w.word[i];
       const col = h("div", { class: "stress-cell" });
+      const state = isVowel(ch) ? cellState(i) : null;
 
-      if (isVowel(ch)) {
-        let btnClass = "stress-btn inactive";
-        if (i === vowelPos) {
-          btnClass = isCorrect ? "stress-btn chosen-correct" : "stress-btn chosen-wrong";
-        }
-        col.appendChild(h("div", { class: btnClass, "aria-hidden": "true" },
+      if (state) {
+        col.appendChild(h("div", { class: `stress-btn ${state}`, "aria-hidden": "true" },
           h("span", { class: "stress-btn-glyph" }, "·")));
       } else {
         col.appendChild(h("div", { class: "stress-empty", "aria-hidden": "true" }));
       }
 
-      const tileClass = i === vowelPos
-        ? (isCorrect ? "stress-tile chosen-correct" : "stress-tile chosen-wrong")
+      // У плитки состояние проявляется только если это не просто «нейтральный»
+      // режим: иначе остаётся дефолтный .stress-tile без подкрашивания.
+      const tileClass = (state && state !== "inactive")
+        ? `stress-tile ${state}`
         : "stress-tile";
       col.appendChild(h("div", { class: tileClass, "aria-hidden": "true" }, ch.toUpperCase()));
       wordBox.appendChild(col);
